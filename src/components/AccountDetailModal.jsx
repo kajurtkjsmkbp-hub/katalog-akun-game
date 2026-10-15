@@ -18,6 +18,7 @@ import {
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import { GAMES } from '../data/games';
+import { getGameFallbackPoster } from '../utils/gameThumbnails';
 
 export function AccountDetailModal({ account, onClose, onCheckoutNow }) {
   const { playClick, playSuccess } = useTheme();
@@ -40,7 +41,10 @@ export function AccountDetailModal({ account, onClose, onCheckoutNow }) {
     }).format(num);
   };
 
-  const images = account.images && account.images.length > 0 ? account.images : [account.thumbnail];
+  const poster = getGameFallbackPoster(account.gameId, account.title, account.rank);
+  const images = (account.images && account.images.length > 0)
+    ? account.images.map(img => img.includes('unsplash.com') ? poster : img)
+    : [account.thumbnail && !account.thumbnail.includes('unsplash.com') ? account.thumbnail : poster];
 
   // Generate WhatsApp Order URL
   const generateWhatsAppUrl = () => {
@@ -113,7 +117,8 @@ Apakah akun masih available dan bisa langsung diproses via Rekber Resmi?`;
               <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-game-dark border border-game-border group">
                 <img
                   src={images[selectedImageIdx]}
-                  alt={account.title}
+                  alt=""
+                  onError={(e) => { e.target.src = poster; }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 left-3 px-3 py-1 rounded-lg bg-game-dark/80 backdrop-blur-md border border-game-border text-xs font-gaming font-bold text-game-primary">

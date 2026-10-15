@@ -57,6 +57,8 @@ const INITIAL_VOUCHERS = [
   { code: 'KHANZANET', type: 'percent', value: 5, minPurchase: 100000, description: 'Diskon 5% Semua Game' },
 ];
 
+import { getGameFallbackPoster } from '../utils/gameThumbnails';
+
 export function CartProvider({ children }) {
   // Accounts state persisted in localStorage
   const [accounts, setAccounts] = useState(() => {
@@ -64,7 +66,20 @@ export function CartProvider({ children }) {
       const saved = localStorage.getItem('khanza_game_accounts');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Auto-migrate any broken Unsplash URLs to guaranteed offline game posters
+          return parsed.map(acc => {
+            const needsFix = !acc.thumbnail || acc.thumbnail.includes('unsplash.com');
+            const poster = getGameFallbackPoster(acc.gameId, acc.title, acc.rank);
+            return {
+              ...acc,
+              thumbnail: needsFix ? poster : acc.thumbnail,
+              images: (!acc.images || acc.images.length === 0 || acc.images.every(img => img.includes('unsplash.com')))
+                ? [poster]
+                : acc.images
+            };
+          });
+        }
       }
     } catch (e) {
       console.error(e);

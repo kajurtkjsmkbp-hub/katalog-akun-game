@@ -1,4 +1,6 @@
-export const INITIAL_ACCOUNTS = [
+import { getGameFallbackPoster } from '../utils/gameThumbnails';
+
+const RAW_ACCOUNTS = [
   // --- MOBILE LEGENDS (MLBB) ---
   {
     id: 'MLBB-9021',
@@ -419,3 +421,13 @@ export const INITIAL_ACCOUNTS = [
     description: 'Monster akun untuk Star Rail. E6S5 Acheron ulti sekali tembus jutaan damage, relic substat crit rate/damage dewa 85/240. Cocok buat yang mau auto clear semua event dan konten sampai tahun depan.'
   }
 ];
+
+export const INITIAL_ACCOUNTS = RAW_ACCOUNTS.map(acc => ({
+  ...acc,
+  thumbnail: getGameFallbackPoster(acc.gameId, acc.title, acc.rank),
+  images: [
+    getGameFallbackPoster(acc.gameId, acc.title, acc.rank),
+    ...(acc.images || [])
+  ]
+}));
+

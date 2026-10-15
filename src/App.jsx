@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTheme } from './context/ThemeContext';
 import { useCart } from './context/CartContext';
 import { Navbar } from './components/Navbar';
@@ -107,6 +107,16 @@ export function App() {
       return 0; // default newest / original order
     });
   }, [accounts, activeGameId, searchTerm, selectedRank, pricePreset, sortBy, badgeFilter]);
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -258,7 +268,7 @@ export function App() {
       />
 
       {/* FLOATING ACTION BUTTONS */}
-      <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-30 flex flex-col items-center gap-2.5">
+      <div className="fixed bottom-24 md:bottom-6 right-3 sm:right-6 z-30 flex flex-col items-center gap-2">
         
         {/* Quick Admin CMS Floating Trigger (Desktop Only, since Mobile has it in bottom nav) */}
         <button
@@ -269,14 +279,16 @@ export function App() {
           <LayoutDashboard className="w-5 h-5" />
         </button>
 
-        {/* Scroll To Top */}
-        <button
-          onClick={scrollToTop}
-          className="p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-700 text-slate-300 hover:text-white hover:border-indigo-500 shadow-md backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1"
-          title="Kembali ke atas"
-        >
-          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
+        {/* Scroll To Top - only visible when scrolled down */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="p-2 sm:p-2.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300 hover:text-white hover:border-indigo-500 shadow-xl backdrop-blur-md transition-all duration-300 animate-fadeIn"
+            title="Kembali ke atas"
+          >
+            <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+        )}
 
       </div>
 
