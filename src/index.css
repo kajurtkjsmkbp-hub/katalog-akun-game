@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GLOBAL RESET & GAMING BASE */
+html, body {
+  background-color: #070913;
+  color: #f1f5f9;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* TYPOGRAPHY HEADINGS */
+h1, h2, h3, .font-gaming {
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.font-display {
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+}
+
+/* GAME THEMES DEFINITIONS VIA CSS VARIABLES */
+:root, [data-theme="all"] {
+  --theme-bg-dark: #070913;
+  --theme-surface: #0f1424;
+  --theme-surface-hover: #182038;
+  --theme-card: rgba(15, 20, 36, 0.9);
+  --theme-border: rgba(99, 102, 241, 0.35);
+  --theme-primary: #6366f1;
+  --theme-primary-hover: #4f46e5;
+  --theme-secondary: #06b6d4;
+  --theme-accent: #f43f5e;
+  --theme-text: #f8fafc;
+  --theme-muted: #94a3b8;
+  --theme-glow: rgba(99, 102, 241, 0.5);
+  --theme-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+  --theme-badge-bg: rgba(99, 102, 241, 0.2);
+  --theme-badge-text: #818cf8;
+}
+
+[data-theme="mlbb"] {
+  /* Mobile Legends: Mythic Gold, Royal Deep Blue, Celestial Diamond */
+  --theme-bg-dark: #060913;
+  --theme-surface: #0d1428;
+  --theme-surface-hover: #152244;
+  --theme-card: rgba(13, 20, 40, 0.94);
+  --theme-border: rgba(245, 158, 11, 0.4);
+  --theme-primary: #f59e0b;
+  --theme-primary-hover: #d97706;
+  --theme-secondary: #3b82f6;
+  --theme-accent: #ec4899;
+  --theme-text: #fef3c7;
+  --theme-muted: #93c5fd;
+  --theme-glow: rgba(245, 158, 11, 0.5);
+  --theme-gradient: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%);
+  --theme-badge-bg: rgba(245, 158, 11, 0.2);
+  --theme-badge-text: #fbbf24;
+}
+
+[data-theme="valorant"] {
+  /* Valorant: Tactical Crimson, Gunmetal Slate, Neon Radiant Cyan */
+  --theme-bg-dark: #080c10;
+  --theme-surface: #0f171f;
+  --theme-surface-hover: #1a2733;
+  --theme-card: rgba(15, 23, 31, 0.95);
+  --theme-border: rgba(255, 70, 85, 0.45);
+  --theme-primary: #ff4655;
+  --theme-primary-hover: #e03241;
+  --theme-secondary: #00f5d4;
+  --theme-accent: #fffb00;
+  --theme-text: #ece8e1;
+  --theme-muted: #9aa89f;
+  --theme-glow: rgba(255, 70, 85, 0.5);
+  --theme-gradient: linear-gradient(135deg, #ff4655 0%, #00f5d4 100%);
+  --theme-badge-bg: rgba(255, 70, 85, 0.2);
+  --theme-badge-text: #ff6b78;
+}
+
+[data-theme="genshin"] {
+  /* Genshin Impact: Celestial Gold, Astral Indigo, Primogem Violet */
+  --theme-bg-dark: #070914;
+  --theme-surface: #10152b;
+  --theme-surface-hover: #1a2244;
+  --theme-card: rgba(16, 21, 43, 0.94);
+  --theme-border: rgba(246, 201, 68, 0.4);
+  --theme-primary: #f6c944;
+  --theme-primary-hover: #e5b326;
+  --theme-secondary: #a78bfa;
+  --theme-accent: #38bdf8;
+  --theme-text: #fdfaf0;
+  --theme-muted: #c7d2fe;
+  --theme-glow: rgba(246, 201, 68, 0.45);
+  --theme-gradient: linear-gradient(135deg, #f6c944 0%, #a78bfa 100%);
+  --theme-badge-bg: rgba(246, 201, 68, 0.2);
+  --theme-badge-text: #fde047;
+}
+
+[data-theme="ff"] {
+  /* Free Fire: Blazing Lava Orange, Volcanic Ember, High-Octane Black */
+  --theme-bg-dark: #0b0605;
+  --theme-surface: #170d0b;
+  --theme-surface-hover: #261613;
+  --theme-card: rgba(23, 13, 11, 0.95);
+  --theme-border: rgba(255, 77, 0, 0.45);
+  --theme-primary: #ff4d00;
+  --theme-primary-hover: #e04400;
+  --theme-secondary: #ffb703;
+  --theme-accent: #ef233c;
+  --theme-text: #fff5eb;
+  --theme-muted: #fdba74;
+  --theme-glow: rgba(255, 77, 0, 0.5);
+  --theme-gradient: linear-gradient(135deg, #ff4d00 0%, #ffb703 100%);
+  --theme-badge-bg: rgba(255, 77, 0, 0.2);
+  --theme-badge-text: #fb923c;
+}
+
+[data-theme="pubgm"] {
+  /* PUBG Mobile: Tactical Hazard Yellow, Armor Gunmetal, Military Green */
+  --theme-bg-dark: #080a0b;
+  --theme-surface: #111618;
+  --theme-surface-hover: #1c2428;
+  --theme-card: rgba(17, 22, 24, 0.95);
+  --theme-border: rgba(245, 179, 1, 0.45);
+  --theme-primary: #f5b301;
+  --theme-primary-hover: #dba000;
+  --theme-secondary: #22c55e;
+  --theme-accent: #06b6d4;
+  --theme-text: #f5f5f4;
+  --theme-muted: #94a3b8;
+  --theme-glow: rgba(245, 179, 1, 0.45);
+  --theme-gradient: linear-gradient(135deg, #f5b301 0%, #22c55e 100%);
+  --theme-badge-bg: rgba(245, 179, 1, 0.2);
+  --theme-badge-text: #fbbf24;
+}
+
+[data-theme="hsr"] {
+  /* Honkai: Star Rail: Astral Deep Cosmos, Starlight Cyan, Stellar Violet */
+  --theme-bg-dark: #070813;
+  --theme-surface: #101224;
+  --theme-surface-hover: #1b1e3d;
+  --theme-card: rgba(16, 18, 36, 0.94);
+  --theme-border: rgba(168, 85, 247, 0.45);
+  --theme-primary: #a855f7;
+  --theme-primary-hover: #9333ea;
+  --theme-secondary: #38bdf8;
+  --theme-accent: #fbbf24;
+  --theme-text: #f5f3ff;
+  --theme-muted: #c4b5fd;
+  --theme-glow: rgba(168, 85, 247, 0.45);
+  --theme-gradient: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+  --theme-badge-bg: rgba(168, 85, 247, 0.2);
+  --theme-badge-text: #c084fc;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070913;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-primary);
+}
+
+/* Ambient Cyber Grid Background */
+.cyber-grid-bg {
+  background-color: var(--theme-bg-dark);
+  background-image: 
+    radial-gradient(circle at 50% 0%, var(--theme-glow) 0%, transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 600px, 40px 40px, 40px 40px;
+}
+
+/* Gamer Beveled Corners */
+.cut-corner {
+  clip-path: polygon(
+    0 10px,
+    10px 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: var(--theme-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--theme-border);
+}
+
+/* Neon glow box shadow helpers */
+.box-glow {
+  box-shadow: 0 0 25px -5px var(--theme-glow);
+}
+
+.box-glow-lg {
+  box-shadow: 0 0 50px -10px var(--theme-glow);
+}
+
+/* MOBILE & GADGET RESPONSIVE OPTIMIZATIONS */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch highlights */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
